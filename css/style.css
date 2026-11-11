@@ -1,0 +1,375 @@
+/* ========== 1. PALETA (variáveis CSS) ==========
+   Mude uma cor aqui e o site inteiro acompanha. */
+:root {
+  --azul: #1a6df0;
+  --azul-escuro: #0b1b3d;
+  --texto: #1e293b;
+  --fundo-claro: #eaf2ff;
+  --branco-vidro: 255, 255, 255; /* só os números, para usar dentro do rgba() */
+}
+ 
+/* ========== 2. BASE ==========
+   O fundo fica FIXO: navbar e rodapé passam "por cima" dele,
+   por isso o vidro tem sempre algo para mostrar atrás. */
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--texto);
+
+  background-image:
+    linear-gradient(rgba(235, 244, 255, 0.45), rgba(235, 244, 255, 0.45)),
+    url("../imagens/fundo.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  padding-top: 100px;
+}
+ 
+/* ========== 3. EFEITO VIDRO SEM BLUR ==========
+   Sem backdrop-filter: o fundo aparece nítido.
+   A ilusão vem de: fundo quase transparente + borda clara
+   + brilho interno (inset) + sombra externa suave. */
+.vidro {
+  background: rgba(var(--branco-vidro), 0.2);
+  border: 1px solid rgba(var(--branco-vidro), 0.75);
+  box-shadow:
+    inset 0 1px 0 rgba(var(--branco-vidro), 0.9),  /* reflexo no topo */
+    0 8px 24px rgba(26, 109, 240, 0.18);           /* sombra azulada */
+}
+.navbar.vidro { max-width: 1140px; border-radius: 1rem; }
+.rodape.vidro { max-width: 1140px; border-radius: 1rem; }
+ 
+/* Link ativo da navbar */
+.navbar .nav-link { color: var(--texto); font-weight: 500; }
+.navbar .nav-link.active { color: var(--azul); border-bottom: 2px solid var(--azul); }
+ 
+/* ========== 4. HERO ========== */
+.hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; }
+.hero h1 span { color: var(--azul); }
+.hero-visual {
+  min-height: 280px;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, var(--azul-escuro), var(--azul));
+  color: #fff;
+  font-size: 5rem;
+  text-shadow: 0 0 24px rgba(120, 170, 255, 0.9); /* brilho neon do "</>" */
+}
+ 
+/* ========== 5. SEÇÕES ========== */
+.painel {
+  background: #fff;
+  border-radius: 1.25rem;
+  box-shadow: 0 6px 20px rgba(11, 27, 61, 0.08);
+}
+.skill {
+  background: rgba(235, 243, 255, 0.75);
+  color: var(--texto);
+  font-weight: 500;
+  border: 1px solid rgba(26, 109, 240, 0.15);
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s ease;
+}
+
+.skill i {
+  font-size: 1.1rem;
+}
+
+.skill:hover {
+  background: #dceaff;
+  border-color: var(--azul);
+  transform: translateY(-2px);
+}
+.projeto-img {
+  height: 120px;
+  border-radius: 0.75rem;
+  background: var(--azul-escuro);
+  color: #fff;
+  font-size: 2.5rem;
+}
+.contato-barra { background: var(--azul-escuro); color: #fff; border-radius: 1.25rem; }
+
+/* ========== FOTO DE PERFIL ========== */
+
+.foto-perfil {
+  width: 170px;
+  height: 170px;
+  padding: 5px;
+  border: 3px solid #9bcaff;
+  border-radius: 50%;
+  box-shadow: 0 5px 20px rgba(26, 109, 240, 0.2);
+}
+
+.foto-perfil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* ========== LAVA-LAMP AZUL ANIMADO ========== */
+
+.hero h1 .fx-lava {
+position: relative;
+display: inline-block;
+font-weight: 800;
+letter-spacing: 0.02em;
+white-space: pre;
+color: transparent !important;
+
+background:
+radial-gradient(circle at 24% 80%, #168BE0 0 19%, transparent 22%),
+radial-gradient(circle at 74% 26%, #45D5FF 0 21%, transparent 24%),
+radial-gradient(circle at 50% 58%, #1455C0 0 23%, transparent 26%),
+radial-gradient(circle at 12% 30%, #2979E8 0 17%, transparent 20%),
+linear-gradient(180deg, #168BE0, #0B1B3D 96%);
+
+background-size: 150% 190%;
+background-position: 0% 0%;
+
+-webkit-background-clip: text;
+background-clip: text;
+
+filter:
+drop-shadow(0 0 12px #168BE055)
+drop-shadow(0 0 5px #45D5FF66);
+
+animation: fx-lava-drift 9s ease-in-out infinite;
+}
+
+/* Segunda camada animada */
+.hero h1 .fx-lava::after {
+content: attr(data-text);
+position: absolute;
+inset: 0;
+pointer-events: none;
+color: transparent;
+
+background:
+radial-gradient(circle at 32% 46%, #45D5FF 0 15%, transparent 18%),
+radial-gradient(circle at 78% 72%, #168BE0 0 22%, transparent 25%),
+radial-gradient(circle at 60% 18%, #1455C0 0 18%, transparent 21%);
+
+background-size: 200% 200%;
+background-position: 100% 0%;
+
+-webkit-background-clip: text;
+background-clip: text;
+
+mix-blend-mode: screen;
+animation: fx-lava-blobs 6.5s ease-in-out infinite;
+}
+
+/* Movimento da camada principal */
+@keyframes fx-lava-drift {
+0%, 100% {
+background-position: 0% 0%;
+}
+
+50% {
+background-position: 100% 100%;
+}
+}
+
+/* Movimento das manchas de luz */
+@keyframes fx-lava-blobs {
+0%, 100% {
+background-position: 100% 0%;
+}
+
+50% {
+background-position: 0% 100%;
+}
+}
+
+/* Respeita preferência por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+.hero h1 .fx-lava,
+.hero h1 .fx-lava::after {
+animation: none;
+}
+}
+
+/* ========== FANTASMINHA AZUL COMPLETO ========== */
+
+#ghost {
+    position: relative;
+    width: 140px;
+    height: 160px;
+    flex: 0 0 100px;
+    transform: scale(0.65);
+    transform-origin: center;
+    overflow: visible;
+}
+
+/* Grade que constrói o corpo */
+#red {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    grid-template-rows: repeat(14, 1fr);
+    grid-template-areas:
+      "a1 a2 a3 a4 a5 top0 top0 top0 top0 a10 a11 a12 a13 a14"
+      "b1 b2 b3 top1 top1 top1 top1 top1 top1 top1 top1 b12 b13 b14"
+      "c1 c2 top2 top2 top2 top2 top2 top2 top2 top2 top2 top2 c13 c14"
+      "d1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 d14"
+      "e1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 e14"
+      "f1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 f14"
+      "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+      "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+      "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+      "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+      "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+      "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+      "st0 st0 an4 st1 an7 st2 an10 an10 st3 an13 st4 an16 st5 st5"
+      "an1 an2 an3 an5 an6 an8 an9 an9 an11 an12 an14 an15 an17 an18";
+
+    animation: upNDown 0.5s infinite;
+}
+
+/* Corpo azul */
+#top0, #top1, #top2, #top3, #top4,
+#st0, #st1, #st2, #st3, #st4, #st5 {
+    background-color: #168BE0;
+}
+
+#top0 { grid-area: top0; }
+#top1 { grid-area: top1; }
+#top2 { grid-area: top2; }
+#top3 { grid-area: top3; }
+#top4 { grid-area: top4; }
+
+#st0 { grid-area: st0; }
+#st1 { grid-area: st1; }
+#st2 { grid-area: st2; }
+#st3 { grid-area: st3; }
+#st4 { grid-area: st4; }
+#st5 { grid-area: st5; }
+
+/* Movimento das partes inferiores */
+#an1 { grid-area: an1; animation: flicker0 0.5s infinite; }
+#an18 { grid-area: an18; animation: flicker0 0.5s infinite; }
+
+#an2 { grid-area: an2; animation: flicker1 0.5s infinite; }
+#an17 { grid-area: an17; animation: flicker1 0.5s infinite; }
+
+#an3 { grid-area: an3; animation: flicker1 0.5s infinite; }
+#an16 { grid-area: an16; animation: flicker1 0.5s infinite; }
+
+#an4 { grid-area: an4; animation: flicker1 0.5s infinite; }
+#an15 { grid-area: an15; animation: flicker1 0.5s infinite; }
+
+#an5 { grid-area: an5; animation: flicker0 0.5s infinite; }
+#an6 { grid-area: an6; animation: flicker0 0.5s infinite; }
+
+#an7 { grid-area: an7; animation: flicker0 0.5s infinite; }
+#an13 { grid-area: an13; animation: flicker0 0.5s infinite; }
+
+#an8 { grid-area: an8; animation: flicker0 0.5s infinite; }
+#an12 { grid-area: an12; animation: flicker0 0.5s infinite; }
+
+#an9 { grid-area: an9; animation: flicker1 0.5s infinite; }
+#an10 { grid-area: an10; animation: flicker1 0.5s infinite; }
+
+#an11 { grid-area: an11; animation: flicker0 0.5s infinite; }
+#an14 { grid-area: an14; animation: flicker0 0.5s infinite; }
+
+/* Olhos */
+#eye, #eye1 {
+    width: 40px;
+    height: 50px;
+    position: absolute;
+    top: 30px;
+}
+
+#eye { left: 10px; }
+#eye1 { right: 30px; }
+
+#eye::before, #eye1::before {
+    content: "";
+    background-color: #FFFFFF;
+    width: 20px;
+    height: 50px;
+    transform: translateX(10px);
+    display: block;
+    position: absolute;
+}
+
+#eye::after, #eye1::after {
+    content: "";
+    background-color: #FFFFFF;
+    width: 40px;
+    height: 30px;
+    transform: translateY(10px);
+    display: block;
+    position: absolute;
+}
+
+/* Pupilas */
+#pupil, #pupil1 {
+    width: 20px;
+    height: 20px;
+    background-color: #0B1B3D;
+    position: absolute;
+    top: 50px;
+    z-index: 1;
+    animation: eyesMovement 3s infinite;
+}
+
+#pupil { left: 10px; }
+#pupil1 { right: 50px; }
+
+/* Sombra */
+#shadow {
+    background-color: #168BE0;
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    border-radius: 50%;
+    transform: rotateX(80deg);
+    filter: blur(20px);
+    top: 80%;
+    animation: shadowMovement 0.5s infinite;
+}
+
+/* ANIMAÇÕES */
+
+@keyframes upNDown {
+    0%, 49% { transform: translateY(0); }
+    50%, 100% { transform: translateY(-10px); }
+}
+
+@keyframes flicker0 {
+    0%, 49% { background-color: #45D5FF; }
+    50%, 100% { background-color: transparent; }
+}
+
+@keyframes flicker1 {
+    0%, 49% { background-color: transparent; }
+    50%, 100% { background-color: #45D5FF; }
+}
+
+@keyframes eyesMovement {
+    0%, 49% { transform: translateX(0); }
+    50%, 99% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes shadowMovement {
+    0%, 49% { opacity: 0.4; }
+    50%, 100% { opacity: 0.15; }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 576px) {
+    #ghost {
+        transform: scale(0.5);
+        flex-basis: 75px;
+    }
+}

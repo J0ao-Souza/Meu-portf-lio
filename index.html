@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport: sem isso o Bootstrap não se adapta ao celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>João Victor | Portfólio</title>
+  <!-- Bootstrap primeiro, seu CSS depois (a última regra vence) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+ 
+  <!-- NAVBAR: fixed-top prende no topo; navbar-expand-lg vira hambúrguer abaixo de 992px -->
+  <nav class="navbar navbar-expand-lg fixed-top vidro mx-auto mt-3 px-3">
+    <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-code-slash text-primary"></i> João Victor</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Abrir menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="projetos.html">Projetos</a></li>
+        <li class="nav-item"><a class="nav-link" href="habilidades.html">Habilidades</a></li>
+        <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+      </ul>
+      <a href="#" class="btn btn-outline-primary rounded-pill"><i class="bi bi-download"></i> Baixar currículo</a>
+    </div>
+  </nav>
+ 
+  <main class="container">
+ 
+    <!-- HERO: row + col = grid. No celular as colunas empilham; no lg ficam lado a lado -->
+    <section class="hero row align-items-center g-4 py-4">
+           <div class="col-lg-6">
+
+        <!-- TÍTULO E FANTASMINHA -->
+        <div class="hero-titulo">
+
+          <h1>
+            Olá, eu sou
+            <span class="fx-lava" data-text="João Victor">João Victor</span>
+          </h1>
+
+          <!-- FANTASMINHA -->
+          <div id="ghost">
+            <div id="red">
+              <div id="pupil"></div>
+              <div id="pupil1"></div>
+              <div id="eye"></div>
+              <div id="eye1"></div>
+
+              <div id="top0"></div>
+              <div id="top1"></div>
+              <div id="top2"></div>
+              <div id="top3"></div>
+              <div id="top4"></div>
+
+              <div id="st0"></div>
+              <div id="st1"></div>
+              <div id="st2"></div>
+              <div id="st3"></div>
+              <div id="st4"></div>
+              <div id="st5"></div>
+
+              <div id="an1"></div>
+              <div id="an2"></div>
+              <div id="an3"></div>
+              <div id="an4"></div>
+              <div id="an5"></div>
+              <div id="an6"></div>
+              <div id="an7"></div>
+              <div id="an8"></div>
+              <div id="an9"></div>
+              <div id="an10"></div>
+              <div id="an11"></div>
+              <div id="an12"></div>
+              <div id="an13"></div>
+              <div id="an14"></div>
+              <div id="an15"></div>
+              <div id="an16"></div>
+              <div id="an17"></div>
+              <div id="an18"></div>
+            </div>
+
+            <div id="shadow"></div>
+          </div>
+
+        </div>
+
+        <!-- DESCRIÇÃO -->
+        <p class="fw-semibold mt-2">Desenvolvedor em formação</p>
+
+        <p class="text-secondary">
+          Aqui você encontra um pouco sobre mim, meus projetos,
+          habilidades e como entrar em contato.
+        </p>
+
+        <!-- BOTÕES -->
+        <a href="projetos.html" class="btn btn-primary rounded-pill px-4 me-2">
+          Ver projetos
+        </a>
+
+        <a href="sobre.html" class="btn btn-outline-primary rounded-pill px-4">
+          Sobre mim
+        </a>
+
+      </div>
+    </section>
+ 
+    <!-- SOBRE + SKILLS -->
+   <section class="painel p-4 my-4">
+  <div class="row g-4 align-items-center">
+
+    <!-- FOTO DE PERFIL -->
+    <div class="col-lg-3 d-flex justify-content-center">
+      <div class="foto-perfil">
+        <img
+          src="imagens/perfil.jpg"
+          alt="Foto de perfil de João Victor"
+          class="rounded-circle"
+        >
+      </div>
+    </div>
+
+    <!-- SOBRE MIM -->
+    <div class="col-lg-5">
+      <h2 class="h4">
+        <i class="bi bi-person-fill text-primary"></i>
+        Sobre Mim
+      </h2>
+
+      <p>
+        Meu nome é João Victor. Sou estudante de Desenvolvimento
+        de Sistemas e Automação Industrial. Gosto de aprender coisas novas, trabalhar
+        com tecnologia e criar projetos que unem criatividade
+        e lógica.
+      </p>
+
+      <span class="badge rounded-pill skill px-3 py-2">
+        <i class="bi bi-mortarboard-fill"></i>
+        Estudante de Desenvolvimento de Sistemas
+      </span>
+    </div>
+
+    <!-- MINHAS COMPETÊNCIAS -->
+    <div class="col-lg-4">
+      <h2 class="h4">
+        <i class="bi bi-bar-chart-fill text-primary"></i>
+        Minhas Skills
+      </h2>
+
+      <div class="d-flex flex-wrap gap-2">
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="devicon-python-plain colored"></i>
+          Python
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="devicon-javascript-plain colored"></i>
+          JavaScript
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="devicon-html5-plain colored"></i>
+          HTML5
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="devicon-css3-plain colored"></i>
+          CSS3
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="devicon-bootstrap-plain colored"></i>
+          Bootstrap
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="devicon-fastapi-plain colored"></i>
+          FastAPI
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="bi bi-database-fill"></i>
+          SQLite
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="devicon-arduino-plain colored"></i>
+          Arduino
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="bi bi-cpu-fill"></i>
+          ESP32
+        </span>
+
+        <span class="skill badge rounded-pill px-3 py-2">
+          <i class="devicon-git-plain colored"></i>
+          Git & GitHub
+        </span>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+ 
+    <!-- PROJETOS: 3 colunas no md+, 1 no celular -->
+    <section class="my-4">
+      <h2 class="h4 mb-3"><i class="bi bi-folder text-primary"></i> Meus projetos</h2>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="painel p-3 h-100">
+            <div class="projeto-img d-flex align-items-center justify-content-center mb-3"><i class="bi bi-grid-3x3"></i></div>
+            <h3 class="h6">Jogo da Velha</h3>
+            <p class="small text-secondary">Jogo clássico feito com HTML, CSS e JavaScript.</p>
+            <a href="projetos.html" class="btn btn-sm btn-outline-primary rounded-pill">Ver projeto</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="painel p-3 h-100">
+            <div class="projeto-img d-flex align-items-center justify-content-center mb-3"><i class="bi bi-box-seam"></i></div>
+            <h3 class="h6">Controle de estoque</h3>
+            <p class="small text-secondary">Sistema para gerenciar produtos, quantidades e entradas/saídas.</p>
+            <a href="projetos.html" class="btn btn-sm btn-outline-primary rounded-pill">Ver projeto</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="painel p-3 h-100">
+            <div class="projeto-img d-flex align-items-center justify-content-center mb-3"><i class="bi bi-code-slash"></i></div>
+            <h3 class="h6">Outros projetos</h3>
+            <p class="small text-secondary">Confira mais projetos que desenvolvi na minha jornada.</p>
+            <a href="projetos.html" class="btn btn-sm btn-outline-primary rounded-pill">Ver projeto</a>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- CONTATO -->
+    <section class="contato-barra p-4 my-4 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+      <div>
+        <h2 class="h5 mb-1"><i class="bi bi-send"></i> Entre em contato</h2>
+        <p class="small mb-0">Tem alguma dúvida, proposta ou só quer trocar uma ideia? Me envie uma mensagem!</p>
+      </div>
+      <a href="contato.html" class="btn btn-primary rounded-pill px-4">Enviar mensagem</a>
+    </section>
+  </main>
+ 
+  <!-- RODAPÉ com o mesmo efeito de vidro -->
+  <footer class="rodape vidro mx-auto mb-3 px-4 py-3 d-flex justify-content-between small">
+    <span>© 2026 João Victor. Todos os direitos reservados.</span>
+    <span>Feito por João Victor</span>
+  </footer>
+ 
+  <!-- JS do Bootstrap: necessário para o menu hambúrguer funcionar -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
