@@ -1,0 +1,99 @@
+/* ===== PÁGINAS INTERNAS (sobre, projetos, habilidades, contato) =====
+   Carregue DEPOIS do style.css. Reaproveita as variáveis da paleta. */
+
+.pagina { min-height: calc(100vh - 220px); }
+
+.kicker { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; }
+.kicker::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: var(--azul); }
+.titulo-pagina { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; }
+.titulo-pagina span { color: var(--azul); }
+.lead-pagina { color: #334155; max-width: 38rem; }
+
+/* cartão "vidro" sem blur, igual à referência */
+.painel-vidro {
+  background: rgba(var(--branco-vidro), .78);
+  border: 1px solid rgba(var(--branco-vidro), .95);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 24px rgba(26, 109, 240, .15);
+}
+.mini-card { text-align: center; padding: 1rem .5rem; font-size: .85rem; font-weight: 600; transition: .25s; }
+.mini-card i { display: block; font-size: 1.6rem; color: var(--azul); margin-bottom: .25rem; }
+.mini-card:hover, .tech:hover { transform: translateY(-4px); border-color: var(--azul); }
+
+/* ===== FOTO COM CONTORNO VERDE ANIMADO + STATUS ONLINE ===== */
+.foto-wrap { position: relative; width: min(100%, 340px); margin-inline: auto; }
+.foto-online {
+  position: relative; aspect-ratio: 4 / 5; padding: 5px;
+  border-radius: 1.75rem; overflow: hidden;
+  background: rgba(34, 197, 94, .25);
+  box-shadow: 0 0 30px rgba(34, 197, 94, .35);
+}
+.foto-online::before { /* faixa verde que gira atrás da foto */
+  content: ""; position: absolute; inset: -60%;
+  background: conic-gradient(transparent 0 55%, #22c55e 80%, #bbf7d0 100%);
+  animation: girar 4s linear infinite;
+}
+.foto-online img {
+  position: relative; display: block; width: 100%; height: 100%;
+  object-fit: cover; border-radius: 1.5rem; background: #dbe8ff;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+
+.badge-online {
+  position: absolute; right: -8px; bottom: 16px;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .45rem 1rem; border-radius: 999px; font-weight: 700;
+  background: #fff; box-shadow: 0 6px 18px rgba(11, 27, 61, .2);
+}
+.badge-online::before {
+  content: ""; width: .7rem; height: .7rem; border-radius: 50%;
+  background: #22c55e; animation: pulso 1.6s ease-out infinite;
+}
+@keyframes pulso {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, .6); }
+  100% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+}
+
+/* ===== PROJETOS ===== */
+.projeto-card { padding: 1rem; transition: transform .3s, box-shadow .3s; animation: subir .6s ease backwards; animation-delay: calc(var(--i) * .08s); }
+.projeto-card:hover { transform: translateY(-8px); box-shadow: 0 18px 36px rgba(26, 109, 240, .25); }
+.thumb {
+  height: 150px; border-radius: .9rem; overflow: hidden; margin-bottom: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--azul-escuro), var(--azul)); color: #fff; font-size: 3rem;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.thumb > * { transition: transform .4s; }
+.projeto-card:hover .thumb > * { transform: scale(1.12); }
+.tag { font-size: .72rem; font-weight: 600; padding: .2rem .65rem; border-radius: 999px; background: #eaf2ff; color: var(--azul); }
+.ver-projeto { font-weight: 600; font-size: .9rem; text-decoration: none; }
+.ver-projeto i { display: inline-block; transition: transform .25s; }
+.ver-projeto:hover i { transform: translateX(5px); }
+@keyframes subir { from { opacity: 0; transform: translateY(16px); } }
+
+/* ===== HABILIDADES ===== */
+.tech { text-align: center; padding: 1rem .5rem; font-size: .85rem; font-weight: 600; transition: .25s; }
+.tech i { display: block; font-size: 2.2rem; margin-bottom: .4rem; }
+.barra { height: .6rem; border-radius: 999px; background: rgba(26, 109, 240, .15); overflow: hidden; }
+.barra span {
+  display: block; height: 100%; width: 0; border-radius: inherit;
+  background: linear-gradient(90deg, var(--azul), #45D5FF);
+  animation: encher 1.2s ease .3s forwards;
+}
+@keyframes encher { to { width: var(--n); } }
+
+/* ===== CONTATO ===== */
+.contato-item { display: flex; align-items: center; gap: .9rem; text-decoration: none; color: var(--texto); font-weight: 500; }
+.contato-item .ico {
+  width: 2.5rem; height: 2.5rem; border-radius: .75rem; display: grid; place-items: center;
+  background: #dceaff; color: var(--azul); transition: .25s;
+}
+.contato-item:hover .ico { background: var(--azul); color: #fff; transform: scale(1.08); }
+.form-contato .input-group-text { background: #eaf2ff; color: var(--azul); border: 0; }
+.form-contato .form-control { background: #f4f8ff; border: 0; }
+.form-contato .form-control:focus { box-shadow: 0 0 0 3px rgba(26, 109, 240, .25); background: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .foto-online::before, .badge-online::before, .projeto-card { animation: none; }
+  .barra span { animation: none; width: var(--n); }
+}

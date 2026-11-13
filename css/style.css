@@ -48,14 +48,7 @@ body {
 /* ========== 4. HERO ========== */
 .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; }
 .hero h1 span { color: var(--azul); }
-.hero-visual {
-  min-height: 280px;
-  border-radius: 1.5rem;
-  background: linear-gradient(135deg, var(--azul-escuro), var(--azul));
-  color: #fff;
-  font-size: 5rem;
-  text-shadow: 0 0 24px rgba(120, 170, 255, 0.9); /* brilho neon do "</>" */
-}
+
  
 /* ========== 5. SEÇÕES ========== */
 .painel {
@@ -202,7 +195,8 @@ animation: none;
     height: 160px;
     flex: 0 0 100px;
     transform: scale(0.65);
-    transform-origin: center;
+    transform-origin: top left;  /* encolhe a partir do canto, sem sobrar espaço à esquerda */
+    margin-bottom: -56px;        /* 160px x (1 - 0.65): devolve o espaço que o scale deixa vazio */
     overflow: visible;
 }
 
@@ -369,7 +363,103 @@ animation: none;
 /* RESPONSIVIDADE */
 @media (max-width: 576px) {
     #ghost {
+      margin-bottom: -80px;
         transform: scale(0.5);
         flex-basis: 75px;
     }
+}
+/* ========== HERO: texto, botões e status ========== */
+
+ 
+.hero-lead  { color: var(--azul-escuro); }
+.hero-texto { color: #334155; max-width: 34rem; } /* mais escuro que text-secondary: lê melhor sobre a imagem */
+ 
+.btn-icone {
+  width: 2.5rem; height: 2.5rem; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+ 
+.status {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .35rem .9rem; border-radius: 999px;
+  background: rgba(var(--branco-vidro), .7);
+  border: 1px solid rgba(26, 109, 240, .15);
+  font-size: .85rem; font-weight: 500;
+}
+.status::before {
+  content: ""; width: .5rem; height: .5rem; border-radius: 50%;
+  background: #22c55e; box-shadow: 0 0 0 4px rgba(34, 197, 94, .2);
+}
+ 
+/* ========== TERMINAL (o card que preenche o buraco) ========== */
+.terminal {
+  max-width: 700px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: rgba(11, 27, 61, .92);
+  color: #cfe3ff;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 1.1rem;
+  box-shadow: 0 20px 50px rgba(11, 27, 61, .35);
+}
+.terminal-barra {
+  display: flex; align-items: center; gap: .4rem;
+  padding: .75rem 1rem;
+  background: rgba(255, 255, 255, .06);
+}
+.terminal-barra span { width: .7rem; height: .7rem; border-radius: 50%; background: #ff5f57; }
+.terminal-barra span:nth-child(2) { background: #febc2e; }
+.terminal-barra span:nth-child(3) { background: #28c840; }
+.terminal-barra small { margin-left: auto; color: #7f93b8; }
+ 
+.terminal-corpo { padding: 1.75rem 1.75rem 2rem; }
+.t-linha { white-space: pre-wrap; padding: .3rem 0; }
+.t-linha.ind { padding-left: 1.5rem; }
+ 
+/* cores do "código" */
+.terminal .k { color: #45D5FF; }  /* palavras reservadas */
+.terminal .f { color: #ffd479; }  /* nome da classe */
+.terminal .s { color: #9be7a6; }  /* textos entre aspas */
+.terminal .c { color: #7f93b8; }  /* comentário / prompt */
+ 
+/* Único movimento de entrada da página: linhas aparecem uma de cada vez */
+.t-linha {
+  opacity: 0;
+  animation: aparecer .4s ease forwards;
+  animation-delay: calc(var(--i) * .45s + .3s);
+}
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+ 
+.cursor {
+  display: inline-block; width: .55ch; height: 1.1em;
+  background: #45D5FF; vertical-align: -3px;
+  animation: piscar 1s steps(1) infinite;
+}
+@keyframes piscar { 50% { opacity: 0; } }
+ 
+@media (prefers-reduced-motion: reduce) {
+  .t-linha { opacity: 1; animation: none; }
+  .cursor  { animation: none; }
+}
+ 
+/* ========== CARD "VER TODOS" (3º projeto) ========== */
+.painel-cta { background: var(--azul); color: #fff; }
+.painel-cta .projeto-img { background: rgba(255, 255, 255, .15); }
+
+.projeto-img {
+    width: 100%;
+    height: 170px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #eaf2fc;
+}
+
+.projeto-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
