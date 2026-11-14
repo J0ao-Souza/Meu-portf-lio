@@ -1,0 +1,46 @@
+/* ===== BORDAS ANIMADAS =====
+   Carregue DEPOIS do style.css e do paginas.css.
+   Truque comum: borda transparente + 2 fundos. Um cobre só o miolo (padding-box),
+   o outro (o degradê animado) aparece só na borda (border-box). */
+
+@property --angulo { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+.borda-giro, .borda-pulso, .borda-fluxo { border: 2px solid transparent; }
+
+/* ---------- 1) GIRO: luz percorrendo a borda (cards de projeto) ---------- */
+.borda-giro {
+  background:
+    linear-gradient(var(--fundo-card, #fff), var(--fundo-card, #fff)) padding-box,
+    conic-gradient(from var(--angulo), rgba(26,109,240,.15), #45D5FF, var(--azul), rgba(26,109,240,.15)) border-box;
+}
+@keyframes borda-giro { to { --angulo: 360deg; } }
+/* o card de projeto já tem a animação "subir", então as duas rodam juntas */
+.projeto-card.borda-giro {
+  animation: subir .6s ease backwards, borda-giro 6s linear infinite;
+  animation-delay: calc(var(--i) * .08s), 0s;
+}
+.projeto-card.borda-giro:hover { animation-duration: .6s, 2s; } /* acelera ao passar o mouse */
+
+/* ---------- 2) PULSO: brilho respirando (ícones e mini cards) ---------- */
+.borda-pulso { border-color: rgba(26,109,240,.25); animation: borda-pulso 3s ease-in-out infinite; }
+@keyframes borda-pulso {
+  50% { border-color: #45D5FF; box-shadow: 0 0 0 3px rgba(69,213,255,.2), 0 0 18px rgba(69,213,255,.55); }
+}
+/* atrasos diferentes para não pulsarem todos juntos */
+.col:nth-child(2n) > .borda-pulso { animation-delay: -1s; }
+.col:nth-child(3n) > .borda-pulso { animation-delay: -2s; }
+
+/* ---------- 3) FLUXO: degradê deslizando (painéis grandes, terminal, formulário) ---------- */
+.borda-fluxo {
+  background:
+    linear-gradient(var(--fundo-card, #fff), var(--fundo-card, #fff)) padding-box,
+    linear-gradient(90deg, var(--azul), #45D5FF, #9bcaff, var(--azul)) border-box;
+  background-size: 100% 100%, 300% 100%;
+  animation: borda-fluxo 5s linear infinite;
+}
+@keyframes borda-fluxo { to { background-position: 0 0, 300% 0; } }
+.terminal.borda-fluxo { --fundo-card: #0b1b3d; }
+
+@media (prefers-reduced-motion: reduce) {
+  .borda-giro, .borda-pulso, .borda-fluxo, .projeto-card.borda-giro { animation: none; }
+}
