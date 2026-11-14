@@ -1,0 +1,119 @@
+/* ===== EFEITOS: carregue por ÚLTIMO (depois de extras.css) =====
+   1) Cursor Ghost   2) Títulos "Drop In"   3) Carrossel de projetos */
+
+/* ---------- 1) CURSOR GHOST ----------
+   Camada extra por cima da página: não captura clique, hover nem foco.
+   O cursor nativo continua aparecendo (não existe "cursor: none" aqui). */
+.cursor-ghost {
+  --ghost-fill: #FFFFFF;     /* cor das cópias */
+  --ghost-stroke: #0b1b3d;   /* contorno fino para a seta branca aparecer no fundo claro do site */
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cursor-ghost__arrow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.cursor-ghost__arrow svg { display: block; overflow: visible; }
+.cursor-ghost__arrow path {
+  fill: var(--ghost-fill);
+  stroke: var(--ghost-stroke);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+/* ---------- 2) TÍTULOS "DROP IN" ----------
+   O JS divide o título em palavras/letras; a entrada em CSS (extras.css) sai de cena
+   nesses títulos, porque o movimento agora é feito pelas molas do JS. */
+.td-ready { animation: none !important; }
+.td-word { display: inline-block; white-space: nowrap; }
+.td-unit { display: inline-block; will-change: transform, opacity; }
+
+/* as letras herdam a cor do trecho em que estão (sem isso, "h1 span { azul }" pintaria tudo) */
+.td-ready .td-word,
+.td-ready .td-unit { color: inherit; }
+
+/* ---------- 3) CARROSSEL DE PROJETOS ---------- */
+.carrossel {
+  --gap: 1.5rem;
+  --pad: .75rem;
+  --por-vista: 1;
+  --dx: 0; --dy: 55px;
+  animation: entra .8s var(--ease) .5s backwards; /* mesma entrada do resto do site */
+}
+@media (min-width: 768px) { .carrossel { --por-vista: 2; } }
+@media (min-width: 992px) { .carrossel { --por-vista: 3; } }
+
+.carrossel-track {
+  position: relative;
+  display: flex;
+  gap: var(--gap);
+  /* folga em cima/embaixo para o card "subir" e a sombra aparecerem sem cortar */
+  padding: 1.25rem var(--pad) 2.5rem;
+  margin-inline: calc(var(--pad) * -1);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--pad);
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  border-radius: 1.5rem;
+}
+.carrossel-track::-webkit-scrollbar { display: none; }
+.carrossel-track:focus-visible { outline: 3px solid rgba(26, 109, 240, .45); outline-offset: 2px; }
+
+.carrossel-item {
+  flex: 0 0 calc((100% - (var(--por-vista) - 1) * var(--gap)) / var(--por-vista));
+  scroll-snap-align: start;
+  display: flex;
+  min-width: 0;
+}
+.carrossel-item > .projeto-card { flex: 1 1 auto; min-width: 0; }
+
+/* controles: setas de vidro + bolinhas */
+.carrossel-controles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: -.5rem;
+}
+.carrossel-btn {
+  width: 2.75rem; height: 2.75rem; padding: 0;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--azul);
+  font-size: 1.1rem;
+  background: rgba(var(--branco-vidro), .78);
+  border: 1px solid rgba(var(--branco-vidro), .95);
+  box-shadow: 0 8px 24px rgba(26, 109, 240, .15);
+  transition: transform .25s, background .25s, color .25s, opacity .25s;
+}
+.carrossel-btn:hover:not(:disabled) { background: var(--azul); color: #fff; transform: scale(1.08); }
+.carrossel-btn:focus-visible { outline: 3px solid rgba(26, 109, 240, .45); outline-offset: 2px; }
+.carrossel-btn:disabled { opacity: .35; }
+
+.carrossel-dots { display: flex; align-items: center; gap: .5rem; }
+.carrossel-dot {
+  width: .6rem; height: .6rem; padding: 0; border: 0; border-radius: 999px;
+  background: rgba(26, 109, 240, .25);
+  transition: width .3s, background .3s;
+}
+.carrossel-dot:hover { background: rgba(26, 109, 240, .5); }
+.carrossel-dot:focus-visible { outline: 3px solid rgba(26, 109, 240, .45); outline-offset: 2px; }
+.carrossel-dot[aria-current="true"] {
+  width: 1.8rem;
+  background: linear-gradient(90deg, var(--azul), #45D5FF);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carrossel { animation: none; }
+  .carrossel-track { scroll-behavior: auto; }
+  .carrossel-btn, .carrossel-dot { transition: none; }
+}
