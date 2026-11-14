@@ -1,0 +1,156 @@
+
+/* ===== EXTRAS: carregue por ÚLTIMO (depois de bordas.css) ===== */
+
+/* ---------- 1) ENTRADA DOS ELEMENTOS (só CSS, sem JavaScript) ----------
+   A página abre na hora só com o fundo; cada bloco encaixa no lugar
+   vindo da esquerda, da direita, de cima ou de baixo. */
+html, body { overflow-x: clip; } /* sem barra lateral enquanto algo vem de fora da tela */
+
+:root { --ease: cubic-bezier(.2, .7, .2, 1); }
+@keyframes entra { from { opacity: 0; transform: translate(var(--dx, 0), var(--dy, 0)) scale(.96); } }
+
+/* cada seção começa um pouco depois da anterior */
+main > section:nth-of-type(1) { --base: .2s; }
+main > section:nth-of-type(2) { --base: .6s; }
+main > section:nth-of-type(3) { --base: .95s; }
+main > section:nth-of-type(4) { --base: 1.25s; }
+
+/* barra de navegação desce do topo, rodapé sobe por último */
+.navbar.fixed-top { --dx: 0; --dy: -90px; animation: entra .8s var(--ease) 0s backwards; }
+.rodape { --dx: 0; --dy: 70px; animation: entra .8s var(--ease) 1.2s backwards; }
+
+/* títulos e textos: vêm da esquerda; títulos de seção, de cima */
+main section > :is(.kicker, h1, .lead-pagina) { --dx: -70px; --dy: 0; animation: entra .8s var(--ease) var(--base, .2s) backwards; }
+main section > h2 { --dx: 0; --dy: -45px; animation: entra .8s var(--ease) var(--base, .2s) backwards; }
+
+/* colunas: primeira da esquerda, última da direita, as do meio de baixo */
+main .row > [class*="col"] {
+  --dx: 0; --dy: 55px;
+  animation: entra .8s var(--ease) calc(var(--base, .2s) + var(--i, 0) * .1s) backwards;
+}
+main .row > [class*="col"]:first-child { --dx: -80px; --dy: 0; }
+main .row > [class*="col"]:last-child  { --dx: 80px;  --dy: 0; }
+main .row > [class*="col"]:only-child  { --dx: 0; --dy: 55px; }
+main .row > [class*="col"]:nth-child(1)  { --i: 0; }
+main .row > [class*="col"]:nth-child(2)  { --i: 1; }
+main .row > [class*="col"]:nth-child(3)  { --i: 2; }
+main .row > [class*="col"]:nth-child(4)  { --i: 3; }
+main .row > [class*="col"]:nth-child(5)  { --i: 4; }
+main .row > [class*="col"]:nth-child(6)  { --i: 5; }
+main .row > [class*="col"]:nth-child(n+7) { --i: 6; }
+
+/* painel grande da home (já tem a borda animada, então somamos as duas animações) */
+section.painel.borda-fluxo {
+  --dx: 0; --dy: 55px;
+  animation: borda-fluxo 5s linear infinite, entra .8s var(--ease) var(--base, .2s) backwards;
+}
+/* faixa "Entre em contato" da home sobe de baixo */
+.contato-barra { --dx: 0; --dy: 60px; animation: entra .8s var(--ease) var(--base, .2s) backwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar.fixed-top, .rodape, main section > *, main .row > [class*="col"], .contato-barra { animation: none; }
+  section.painel.borda-fluxo { animation: borda-fluxo 5s linear infinite; }
+}
+
+/* ---------- 3) SOBRE ---------- */
+.foto-wrap { width: min(100%, 460px); }
+.foto-online { border-radius: 2.25rem; }
+.foto-online img { border-radius: 2rem; }
+.badge-online { right: -6px; bottom: 28px; font-size: 1.05rem; padding: .6rem 1.3rem; }
+
+.trilha > [class*="col"] { position: relative; }
+.curso {
+  position: relative; overflow: hidden; padding: 1.75rem; border-radius: 1.5rem; color: #fff;
+  background: linear-gradient(145deg, #0b1b3d, #14418f 70%, #1a6df0);
+  box-shadow: 0 14px 34px rgba(11, 27, 61, .3);
+  transition: transform .35s, box-shadow .35s;
+}
+.curso:hover { transform: translateY(-8px) rotate(-.4deg); box-shadow: 0 22px 44px rgba(26, 109, 240, .45); }
+.curso::after { /* brilho que cruza o card no hover */
+  content: ""; position: absolute; inset: 0; transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .22), transparent 65%);
+  transition: transform .8s;
+}
+.curso:hover::after { transform: translateX(120%); }
+.curso-num { position: absolute; right: 1rem; top: -.4rem; font-size: 5.5rem; font-weight: 800; color: rgba(255, 255, 255, .08); line-height: 1; }
+.curso-ico {
+  width: 3.4rem; height: 3.4rem; border-radius: 1rem; display: grid; place-items: center; font-size: 1.7rem;
+  background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .3); margin-bottom: 1rem;
+}
+.curso-status {
+  display: inline-flex; align-items: center; gap: .45rem; font-size: .78rem; font-weight: 700;
+  padding: .25rem .8rem; border-radius: 999px; background: rgba(34, 197, 94, .2); color: #bbf7d0; margin-bottom: .6rem;
+}
+.curso-status::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: #22c55e; animation: pulso 1.6s ease-out infinite; }
+.curso h3 { font-size: 1.2rem; font-weight: 700; }
+.curso p { color: #cfe3ff; font-size: .9rem; }
+.chip { font-size: .75rem; font-weight: 600; padding: .25rem .7rem; border-radius: 999px; background: rgba(255, 255, 255, .15); }
+
+.curso-meta { background: rgba(255, 255, 255, .8); color: var(--azul-escuro); border: 2px dashed var(--azul); box-shadow: none; }
+.curso-meta p { color: #334155; }
+.curso-meta .curso-ico { background: #dceaff; border-color: transparent; color: var(--azul); }
+.curso-meta .curso-num { color: rgba(26, 109, 240, .08); }
+.curso-meta .curso-status { background: #dceaff; color: var(--azul); }
+.curso-meta .curso-status::before { background: var(--azul); }
+
+@media (min-width: 992px) {
+  .trilha > [class*="col"]:not(:last-child)::after { /* seta ligando os cards */
+    content: "\F138"; font-family: "bootstrap-icons"; position: absolute; right: -1.15rem; top: 50%; z-index: 2;
+    width: 2rem; height: 2rem; margin-top: -1rem; display: grid; place-items: center; border-radius: 50%;
+    background: #fff; color: var(--azul); box-shadow: 0 4px 14px rgba(26, 109, 240, .35);
+    animation: seta 1.6s ease-in-out infinite;
+  }
+}
+@keyframes seta { 50% { transform: translateX(5px); } }
+
+/* ---------- 4) HABILIDADES: "da tela ao circuito" ---------- */
+.camada { position: relative; display: flex; gap: 1rem; padding-bottom: 1.5rem; }
+.camada:last-child { padding-bottom: 0; }
+.camada-ico {
+  flex: 0 0 3rem; width: 3rem; height: 3rem; border-radius: 1rem; display: grid; place-items: center; font-size: 1.4rem;
+  color: #fff; background: linear-gradient(135deg, var(--azul-escuro), var(--azul)); box-shadow: 0 6px 16px rgba(26, 109, 240, .35);
+  transition: transform .3s;
+}
+.camada:hover .camada-ico { transform: scale(1.12) rotate(-6deg); }
+.camada:not(:last-child)::before { /* linha vertical */
+  content: ""; position: absolute; left: 1.45rem; top: 3.2rem; bottom: .2rem; width: 3px; border-radius: 3px;
+  background: rgba(26, 109, 240, .2);
+}
+.camada:not(:last-child)::after { /* pontinho de dados descendo */
+  content: ""; position: absolute; left: 1.2rem; top: 3.2rem; width: .85rem; height: .85rem; border-radius: 50%;
+  background: #45D5FF; box-shadow: 0 0 12px #45D5FF; animation: dado 2.2s ease-in-out infinite;
+}
+.camada:nth-child(3)::after { animation-delay: -.7s; }
+@keyframes dado { 0% { transform: translateY(0); opacity: 0; } 15%, 85% { opacity: 1; } 100% { transform: translateY(2.8rem); opacity: 0; } }
+.camada h3 { font-weight: 700; margin: 0; }
+.camada .uso { font-size: .78rem; color: #475569; margin: .15rem 0 .5rem; }
+.camada .uso b { color: var(--azul); }
+.camada-prox .camada-ico { background: transparent; color: var(--azul); border: 2px dashed var(--azul); box-shadow: none; }
+.camada-prox:hover .camada-ico { animation: tremer .4s; }
+@keyframes tremer { 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+
+/* ---------- 5) CONTATO ---------- */
+.disp { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .9rem; border-radius: 999px; font-size: .85rem; font-weight: 600;
+  background: rgba(255, 255, 255, .8); border: 1px solid rgba(34, 197, 94, .35); }
+.disp::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: #22c55e; animation: pulso 1.6s ease-out infinite; }
+
+.contato-item {
+  padding: .8rem 1rem; border-radius: 1rem; background: rgba(255, 255, 255, .78); border: 1px solid #fff;
+  box-shadow: 0 6px 18px rgba(26, 109, 240, .12); transition: transform .25s, box-shadow .25s;
+}
+.contato-item:hover { transform: translateX(8px); box-shadow: 0 10px 24px rgba(26, 109, 240, .25); color: var(--texto); }
+.contato-item small { display: block; color: #64748b; font-weight: 500; font-size: .75rem; }
+.contato-item .seta { margin-left: auto; color: var(--azul); opacity: 0; transform: translateX(-6px); transition: .25s; }
+.contato-item:hover .seta { opacity: 1; transform: none; }
+
+.form-contato { border-radius: 1.5rem; }
+.form-contato .topo { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.5rem; }
+.form-contato .topo .ico { width: 2.8rem; height: 2.8rem; border-radius: .9rem; display: grid; place-items: center; font-size: 1.3rem; color: #fff;
+  background: linear-gradient(135deg, var(--azul), #45D5FF); }
+.form-contato .input-group { border-radius: .85rem; overflow: hidden; transition: box-shadow .25s, transform .25s; }
+.form-contato .input-group:focus-within { box-shadow: 0 0 0 3px rgba(26, 109, 240, .3); transform: translateY(-2px); }
+.form-contato .form-control:focus { box-shadow: none; }
+.form-contato .btn-primary { background: linear-gradient(90deg, var(--azul), #2a8bff); border: 0; font-weight: 600; transition: transform .25s, box-shadow .25s; }
+.form-contato .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(26, 109, 240, .4); }
+.form-contato .btn-primary i { display: inline-block; transition: transform .3s; }
+.form-contato .btn-primary:hover i { transform: translate(4px, -4px) rotate(10deg); }
