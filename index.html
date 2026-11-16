@@ -13,7 +13,11 @@
    <link href="css/efeitos.css" rel="stylesheet">
 </head>
 <body>
-
+<!--Aqui fica navbar que é a parte de cima do projeto, onde se utilzia a tag <ul> para criar uma lista e <li> para criar os itens dessa lista
+  com isso voce utiliza alguns comandos do bootstrap feitos para navbar mesmo, como por exemplo a navbar-nav que faz com que coloque os itens
+  um ao lado do outro na horizontal e o mx-auto centraliza esses itens, alem disso foi utilizado outras feramentos como a tag <nav>
+    que cria essa nav bar e outra ferramenta do bootstrap que é a navbar-brand que faz com que destaca o logotipo ou nome principal
+    da marca ou o site, o <i> class=bi bi-code-slash foi usado para colocar um icone que fica antes do nome-->
   <nav class="navbar navbar-expand-lg fixed-top vidro mx-auto mt-3 px-3">
     <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-code-slash text-primary"></i> João Victor</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Abrir menu">
@@ -43,7 +47,7 @@
           <span class="fx-lava" data-text="João Victor">João Victor</span>
         </h1>
 
-        <!-- FANTASMINHA (mesmo código, só o CSS do espaço mudou) -->
+        <!-- aqui fica o modelo pronto do fantasma de pac man -->
         <div id="ghost">
           <div id="red">
             <div id="pupil"></div><div id="pupil1"></div>
@@ -67,17 +71,15 @@
         <div class="d-flex flex-wrap align-items-center gap-2">
           <a href="projetos.html" class="btn btn-primary rounded-pill px-4">Ver projetos</a>
           <a href="contato.html" class="btn btn-outline-primary rounded-pill px-4">Falar comigo</a>
-          <!-- troque o # pelos seus links reais -->
           <a href="https://github.com/J0ao-Souza" class="btn btn-icone btn-outline-primary rounded-circle" aria-label="GitHub"><i class="bi bi-github"></i></a>
           
         </div>
-
-        <!-- ajuste ou apague o texto conforme a sua situação -->
+        <!--adiciona o efeito status no que estiver dentro desse span -->
         <span class="status mt-3">Estudando para futuras oportunidades</span>
 
       </div>
 
-      <!-- TERMINAL: cada linha aparece em sequência (--i = ordem) -->
+      <!--Cria aquele efeito de terminal, o -i faz com que cada elemento apareça em sequência,e no final faz um efeito de cursor piscando -->
       <div class="col-lg-7">
         <div class="terminal  borda-fluxo ms-lg-auto" aria-hidden="true">
           <div class="terminal-barra">
@@ -97,7 +99,9 @@
 
     </section>
 
-    <!-- SOBRE (resumo) + SKILLS (destaques): o detalhe fica nas outras páginas -->
+    <!--Aqui é a section que faz aquela janela com minha foto utilizando o link e a class rounded-circle, cria uma div com um pouco sobre mim
+    e tambem usa um icon do bootstrap usando o bi bi-person-fill agora, alem disso ele vai criar uma outra coluna dentro desse espaço
+    que tambem coloca outro icone com bi bi-bar-chart, e logo em seguida vai adicionando os icones e adicionando eles -->
     <section class="painel  borda-fluxo p-4 mt-3 mb-5">
       <div class="row g-4 align-items-center">
 
@@ -132,7 +136,9 @@
       </div>
     </section>
 
-    <!-- PROJETOS -->
+    <!--Aqui temos mais uma section, só que dessa vez é a parte de 2 projetos com um botao para acessar todos que leva para a pagina dos
+    projetos, ele tambem coloca um icone de pasta utilizando bi bi-folder e tambem cria uma espaço para colocar a imagem do projeto
+    e cria uma descriçao-->
     <section class="my-5">
       <h2 class="h4 mb-3"><i class="bi bi-folder text-primary"></i> Meus projetos</h2>
       <div class="row g-3">
@@ -170,7 +176,8 @@
       </div>
     </section>
 
-    <!-- CONTATO -->
+    <!--Aqui fica a section de contato, que cria uma pequena barra no fim da página que pode levar direto para a parte de contato e  tambem
+    coloca um icone com bi bi-send-->
     <section class="contato-barra p-4 my-5 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
       <div>
         <h2 class="h5 mb-1"><i class="bi bi-send"></i> Entre em contato</h2>
@@ -181,7 +188,7 @@
   </main>
 
 
-
+<!-- aquii sao os links dos scripts js que vao ser adicionados, como por exemplo o efeito do cursor e a animaçao dos titulos quando entrar na pagina-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/cursor-ghost.js" defer></script>
   <script src="js/titulos-drop.js" defer></script>
